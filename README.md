@@ -42,7 +42,7 @@ No build step or npm dependencies are required.
 
 ## Confirm with the client before launch
 - **Reservation number:** the buttons use `+357 22 333 313`. The client messaged from `+357 99 237577`.
-- **Pool rates:** the till also has "team" and "loyalty" rates, which aren't shown (the page says to ask at the bar). Should they be listed?
+- **Pool rates:** the till also has "team" and "loyalty" rates, which aren't shown on the page. Should they be listed?
 - **Food ingredients:** the till has none for food. What's in "Mama's", "Marco Polo", "Skepasti 1/2", and the pizza toppings? Adding them to the till's "+ info" would bring them onto the website on the next refresh.
 - **Photos:** more are needed, especially of the TVs during a match, food, coffee and the outside of the building.
 - **Map:** check that the Google Maps embed lands on the right building.

@@ -1,21 +1,6 @@
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
-const toggle = document.querySelector('.menu-toggle');
-const nav = document.querySelector('.main-nav');
-const setNav = open => {
-  nav.classList.toggle('open', open);
-  toggle.setAttribute('aria-expanded', String(open));
-  toggle.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
-};
-if (toggle && nav) {
-  toggle.addEventListener('click', () => setNav(!nav.classList.contains('open')));
-  nav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setNav(false)));
-  document.addEventListener('keydown', event => {
-    if (event.key === 'Escape' && nav.classList.contains('open')) { setNav(false); toggle.focus(); }
-  });
-}
-
 document.getElementById('year').textContent = new Date().getFullYear();
 
 // Open / closed status in Cyprus time. Opens 13:00 weekdays, 12:00 weekends; closes 01:00 the next morning.
@@ -180,18 +165,7 @@ document.addEventListener('keydown', event => {
   }
 });
 
-const sections = [...document.querySelectorAll('main section[id]')];
-const navLinks = [...document.querySelectorAll('.main-nav a')];
 if ('IntersectionObserver' in window) {
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        navLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === `#${entry.target.id}`));
-      }
-    });
-  }, { rootMargin: '-35% 0px -55% 0px' });
-  sections.forEach(section => observer.observe(section));
-
   // Scroll reveals: elements fade up gently as they enter the viewport
   const revealer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
