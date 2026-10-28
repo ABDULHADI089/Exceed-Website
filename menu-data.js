@@ -2,7 +2,7 @@
 // Each item: name, price in euro, optional sizes ([label, price] pairs), ingredients and photo.
 window.EXCEED_MENU = [
   { id: "pool", title: "Pool Tables", sections: [
-    { title: "Table Rates", note: "Per table. Team and loyalty rates available — ask at the bar.", items: [
+    { title: "Table Rates", note: "Per table. Team and loyalty rates available. Ask at the bar.", items: [
       { name: "Up to 3 players · 15 min", price: 2.25 },
       { name: "Up to 3 players · 1 hour", price: 9.0 },
       { name: "4+ players · 15 min", price: 3.0 },

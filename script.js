@@ -1,6 +1,23 @@
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
+// Header menu: opens from the top-right button, closes on link, outside click or Escape
+const navToggle = document.querySelector('.nav-toggle');
+const siteMenu = document.getElementById('site-menu');
+const setMenu = open => {
+  siteMenu.classList.toggle('open', open);
+  navToggle.setAttribute('aria-expanded', String(open));
+  navToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+};
+navToggle.addEventListener('click', () => setMenu(!siteMenu.classList.contains('open')));
+siteMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setMenu(false)));
+document.addEventListener('click', event => {
+  if (siteMenu.classList.contains('open') && !siteMenu.contains(event.target) && !navToggle.contains(event.target)) setMenu(false);
+});
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape' && siteMenu.classList.contains('open')) { setMenu(false); navToggle.focus(); }
+});
+
 document.getElementById('year').textContent = new Date().getFullYear();
 
 // Open / closed status in Cyprus time. Opens 13:00 weekdays, 12:00 weekends; closes 01:00 the next morning.
@@ -87,7 +104,7 @@ const renderMenu = () => {
     : `No matches for “${term}” in ${title}.${showAll}`;
   results.innerHTML = html || `<p class="menu-empty">${elsewhere ? 'Try all categories,' : 'Try another word,'} or <a href="tel:+35722333313">call us</a> and we'll help.</p>`;
   searchClear.hidden = !raw;
-  search.placeholder = activeGroup === 'all' ? `Search all ${totalItems} items — try “mojito”` : `Search ${groupTitle(activeGroup)} — try “${searchHints[activeGroup]}”`;
+  search.placeholder = activeGroup === 'all' ? `Search all ${totalItems} items, try “mojito”` : `Search ${groupTitle(activeGroup)}, try “${searchHints[activeGroup]}”`;
   filters.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.group === activeGroup)));
 };
 
